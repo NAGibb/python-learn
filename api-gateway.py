@@ -1,7 +1,19 @@
-import boto3
 
+import sys
 
-client = boto3.client('apigateway', region_name='us-east-1')
+libnames = ['boto3']
+for libname in libnames:
+    try:
+        lib = __import__(libname)
+    except:
+        print(sys.exc_info())
+    else:
+        globals()[libname] = lib
+
+    try:
+        client = boto3.client('apigateway', region_name='us-east-1')
+    except:
+        print(sys.exc_info())
 
 
 # response = client.create_rest_api(
@@ -21,7 +33,8 @@ client = boto3.client('apigateway', region_name='us-east-1')
 #     },
 #     policy='string'
 # )
-response = client.create_rest_api(
-     name='gway_test'
- )
-print(response)
+    try:
+        response = client.create_rest_api(name='gway_test')
+        print(response)
+    except:
+        print(sys.exc_info())

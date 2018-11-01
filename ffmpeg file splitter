@@ -1,0 +1,8 @@
+ffmpeg -i somefile.mp3 -f segment -segment_time 3 -c copy out%03d.mp3
+
+
+
+ffmpeg -i /home/nathgibb/Downloads/150619_0023.MP3 -f segment -segment_time 3600 -c copy out%03d.mp3
+
+
+150619_0023.MP3
