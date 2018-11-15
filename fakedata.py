@@ -81,29 +81,47 @@ employee = []
 #employee.append('test', 'value' )
 
 #print(employee)
+
+
+#gbl_project_base="gen_fake_company_dat"
+#gbl_project_name = gbl_project_base + '-' + str(int(time.time()))
+
+
 import csv, datetime
 
-
-
 csv_header = 'first_name','last_name', 'address', 'phone' , 'date_of_birth','hiredate','ssn'
-employee_number = 2000
-print ("Number of employees: %s" % employee_number)
-print (datetime.datetime.now().strftime("%a, %d %B %Y %H:%M:%S"))
-with open('employee.csv', 'w') as csvFile:
-    writer = csv.writer(csvFile)
-    writer.writerows([csv_header])
-    for i in range(employee_number):
-        first_name = fake.first_name()
-        last_name = fake.last_name()
-        address = fake.address()
-        phone = fake.phone_number()
-        dob = fake.date_of_birth(tzinfo=None, minimum_age=18, maximum_age=62)
-        hiredate = fake.date_between(start_date="-20y", end_date="-1y")
-        ssn = fake.ssn(taxpayer_identification_number_type="SSN")
-        employee.append("'{}' , '{}' , '{}' , '{}' , '{}' , '{}' , '{}'".format(first_name, last_name, address, phone, dob, hiredate, ssn))
-        writer.writerows([employee])
-csvFile.close()
-print (datetime.datetime.now().strftime("%a, %d %B %Y %H:%M:%S"))
+employee_runs = 100
+employee_number = 10
+company_name = fake.company()
+company_bucket = company_name
+schema_name = company_name
+table_name = 'employees_tb'
+
+filename = "/foo/bar/baz.txt"¨
+os.makedirs(os.path.dirname(filename), exist_ok=True)
+with open(filename, "w") as f:
+    f.write("FOOBAR")
+
+
+for runs in range(employee_runs):
+    outputcsv = ("LOAD%s.csv" % runs)
+    print ("Number of employees: %s" % employee_number)
+    print (datetime.datetime.now().strftime("%a, %d %B %Y %H:%M:%S"))
+    with open(outputcsv, 'w') as csvFile:
+        writer = csv.writer(csvFile)
+        writer.writerows([csv_header])
+        for i in range(employee_number):
+            first_name = fake.first_name()
+            last_name = fake.last_name()
+            address = fake.address()
+            phone = fake.phone_number()
+            dob = fake.date_of_birth(tzinfo=None, minimum_age=18, maximum_age=62)
+            hiredate = fake.date_between(start_date="-20y", end_date="-1y")
+            ssn = fake.ssn(taxpayer_identification_number_type="SSN")
+            employee.append("'{}' , '{}' , '{}' , '{}' , '{}' , '{}' , '{}'".format(first_name, last_name, address, phone, dob, hiredate, ssn))
+            writer.writerows([employee])
+    csvFile.close()
+    print (datetime.datetime.now().strftime("%a, %d %B %Y %H:%M:%S"))
 
 
 
