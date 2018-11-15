@@ -15,9 +15,9 @@ from faker.providers import internet
 #print(fake.ipv4_private())
 
 
-import pydbgen
-from pydbgen import pydbgen
-myDB=pydbgen.pydb()
+#import pydbgen
+#from pydbgen import pydbgen
+#myDB=pydbgen.pydb()
 
 #myDB.gen_table(db_file='Testdb.DB',table_name='People',
 #fields=['name','city','street_address','email'])
@@ -41,19 +41,15 @@ myDB=pydbgen.pydb()
 #print(fake.profile(fields=None, sex=None))
 
 
-fruits = ['apple', 'banana', 'cherry']
-fruits.append("orange")
+#person_profile = fake.profile(fields=None, sex=None)
+#for key,val in person_profile.items():
+    #print("['{}', '{}'],".format(key, val))
+#    employee.append("'{}', '{}'".format(key, val))
 
 employee = []
 
-person_profile = fake.profile(fields=None, sex=None)
-for key,val in person_profile.items():
-    #print("['{}', '{}'],".format(key, val))
-    employee.append("'{}', '{}'".format(key, val))
 
-
-
-print(employee)
+#print(employee)
 
 
 #print('simple')
@@ -71,29 +67,51 @@ print(employee)
 #     'ssn': '740-64-4032',
 #     'username': 'hunterarnold',
 #     'website': ['http://parsons.com/', 'https://www.vargas-rich.com/']}
-first_name = fake.first_name()
-last_name = fake.last_name()
-address = fake.address()
-phone = fake.phone_number()
-dob = fake.date_of_birth(tzinfo=None, minimum_age=18, maximum_age=62)
-hiredate = fake.date_between(start_date="-20y", end_date="-1y")
-ssn = fake.ssn(taxpayer_identification_number_type="SSN")
 
 
-print("first_name:%s" % first_name)
-print("last_name:%s" % last_name)
-print("address:%s" % address)
-print("phone:%s" % phone)
-print("birthdate:%s" % dob)
-print("hiredate:%s" % hiredate)
-print("ssn:%s" % ssn)
+#new_employee = 'first_name','last_name','address','phone','dob','hiredate','ssn'
+#new_employee = '{}' , '{}'.format(first_name, last_name)
+#employee.append(new_employee)
 
-import csv
 
-csvData = [['Person', 'Age'], ['Peter', '22'], ['Jasmine', '21'], ['Sam', '24']]
+#employee.append("'first_name','last_name'")
 
-with open('person.csv', 'w') as csvFile:
+
+# Adding a new key value pair
+#employee.append('test', 'value' )
+
+#print(employee)
+import csv, datetime
+
+
+
+csv_header = 'first_name','last_name', 'address', 'phone' , 'date_of_birth','hiredate','ssn'
+employee_number = 2000
+print ("Number of employees: %s" % employee_number)
+print (datetime.datetime.now().strftime("%a, %d %B %Y %H:%M:%S"))
+with open('employee.csv', 'w') as csvFile:
     writer = csv.writer(csvFile)
-    writer.writerows(csvData)
-
+    writer.writerows([csv_header])
+    for i in range(employee_number):
+        first_name = fake.first_name()
+        last_name = fake.last_name()
+        address = fake.address()
+        phone = fake.phone_number()
+        dob = fake.date_of_birth(tzinfo=None, minimum_age=18, maximum_age=62)
+        hiredate = fake.date_between(start_date="-20y", end_date="-1y")
+        ssn = fake.ssn(taxpayer_identification_number_type="SSN")
+        employee.append("'{}' , '{}' , '{}' , '{}' , '{}' , '{}' , '{}'".format(first_name, last_name, address, phone, dob, hiredate, ssn))
+        writer.writerows([employee])
 csvFile.close()
+print (datetime.datetime.now().strftime("%a, %d %B %Y %H:%M:%S"))
+
+
+
+
+#print("first_name:%s" % first_name)
+#print("last_name:%s" % last_name)
+#print("address:%s" % address)
+#print("phone:%s" % phone)
+#print("birthdate:%s" % dob)
+#print("hiredate:%s" % hiredate)
+#print("ssn:%s" % ssn)
