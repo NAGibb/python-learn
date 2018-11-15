@@ -12,9 +12,14 @@ for libname in libnames:
 
 
     try:
-        s3 = boto3.resource('s3')
+        from faker import Faker
+        fake = faker()
+        fake.name()
     except:
         print(sys.exc_info())
+
+
+
 
 # response = s3.list_buckets()
 
@@ -30,23 +35,23 @@ print("Project name: %s" % gbl_project_name)
 # gbl_project_name = 'some-private-bucket'
 # gbl_project_name = 'bucket-to-check'
 
-bucket = s3.Bucket(gbl_project_name)
+#bucket = s3.Bucket(gbl_project_name)
 
 
-def check_bucket(bucket):
-    try:
-        s3.meta.client.head_bucket(Bucket=gbl_project_name)
-        print("Bucket Exists!")
-        return True
-    except botocore.exceptions.ClientError as e:
-        # If a client error is thrown, then check that it was a 404 error.
-        # If it was a 404 error, then the bucket does not exist.
-        error_code = int(e.response['Error']['Code'])
-        if error_code == 404:
-            print("Bucket Does Not Exist!")
-            return False
-
-print("checking for bucket: %s" % check_bucket(bucket))
+#def check_bucket(bucket):
+#    try:
+#        s3.meta.client.head_bucket(Bucket=gbl_project_name)
+#        print("Bucket Exists!")
+#        return True
+#    except botocore.exceptions.ClientError as e:
+#        # If a client error is thrown, then check that it was a 404 error.
+#        # If it was a 404 error, then the bucket does not exist.
+#        error_code = int(e.response['Error']['Code'])
+#        if error_code == 404:
+#            print("Bucket Does Not Exist!")
+#            return False
+#
+# print("checking for bucket: %s" % check_bucket(bucket))
 
 
 
