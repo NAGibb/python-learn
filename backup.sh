@@ -5,6 +5,8 @@ echo "Cleaning up and backing up data"
 
 
 # data backup (git) goes here
+git checkout -b ng_learn
+git status
 cd ~/code/python-learn
 git add .
 git commit -m "updating learning"
