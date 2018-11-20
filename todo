@@ -1,0 +1,9 @@
+olivaw
+
+To do
+data generator
+    create s3 bucket for incoming data generation
+      least privilege
+      private
+      logged access
+      archive files after read

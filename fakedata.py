@@ -87,24 +87,27 @@ employee = []
 #gbl_project_name = gbl_project_base + '-' + str(int(time.time()))
 
 
-import csv, datetime
-
-csv_header = 'first_name','last_name', 'address', 'phone' , 'date_of_birth','hiredate','ssn'
-employee_runs = 100
-employee_number = 10
+import csv, datetime, os
+employee = []
+csv_header = 'first_name','last_name', 'address', 'phone' , 'date_of_birth','hiredate','ssn','fakedata'
+fakedatamsg ="Fake date for testing purposes only"
+employee_runs = 10
+employee_number = 1000
 company_name = fake.company()
 company_bucket = company_name
 schema_name = company_name
 table_name = 'employees_tb'
 
-filename = "/foo/bar/baz.txt"¨
+filename = "{}/{}/table.def".format(company_name, table_name)
 os.makedirs(os.path.dirname(filename), exist_ok=True)
 with open(filename, "w") as f:
-    f.write("FOOBAR")
+    f.write("{}")
 
 
 for runs in range(employee_runs):
-    outputcsv = ("LOAD%s.csv" % runs)
+    #outputcsv = ("LOAD%s.csv" % runs)
+    print("run number: %s" % runs)
+    outputcsv = "{}/{}/LOAD{}.csv".format(company_name, table_name, runs)
     print ("Number of employees: %s" % employee_number)
     print (datetime.datetime.now().strftime("%a, %d %B %Y %H:%M:%S"))
     with open(outputcsv, 'w') as csvFile:
@@ -118,18 +121,8 @@ for runs in range(employee_runs):
             dob = fake.date_of_birth(tzinfo=None, minimum_age=18, maximum_age=62)
             hiredate = fake.date_between(start_date="-20y", end_date="-1y")
             ssn = fake.ssn(taxpayer_identification_number_type="SSN")
-            employee.append("'{}' , '{}' , '{}' , '{}' , '{}' , '{}' , '{}'".format(first_name, last_name, address, phone, dob, hiredate, ssn))
+            employee.append("'{}' , '{}' , '{}' , '{}' , '{}' , '{}' , '{}' , '{}'".format(first_name, last_name, address, phone, dob, hiredate, ssn, fakedatamsg))
             writer.writerows([employee])
     csvFile.close()
+    employee = []
     print (datetime.datetime.now().strftime("%a, %d %B %Y %H:%M:%S"))
-
-
-
-
-#print("first_name:%s" % first_name)
-#print("last_name:%s" % last_name)
-#print("address:%s" % address)
-#print("phone:%s" % phone)
-#print("birthdate:%s" % dob)
-#print("hiredate:%s" % hiredate)
-#print("ssn:%s" % ssn)
